@@ -30,12 +30,12 @@ st.markdown("""
     /* Code block style */
     .stCode {
         background-color: #0a0a0a;
-        color: white;
+        color: black;
         border-radius: 5px;
         padding: 10px;
     }
     /* Dark theme for sidebar */
-    .sidebar {
+    .sidebar sidebarcontent {
         background-color: #2c3e50;
         color: #403f3f;
     }
