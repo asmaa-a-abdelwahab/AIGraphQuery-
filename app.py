@@ -18,7 +18,7 @@ INSTALL_TIMEOUT = 120
 st.markdown("""
     <style>
     .main {
-        background-color: #403f3f;
+        background-color: #f9f9f9;
         font-family: 'Arial', sans-serif;
     }
     .stTextInput, .stButton, .stTextArea {
@@ -26,6 +26,18 @@ st.markdown("""
     }
     .stProgress {
         color: #4CAF50;
+    }
+    /* Code block style */
+    .stCode {
+        background-color: #0a0a0a;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    /* Dark theme for sidebar */
+    .sidebar {
+        background-color: #2c3e50;
+        color: #403f3f;
     }
     </style>
 """, unsafe_allow_html=True)
