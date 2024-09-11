@@ -18,7 +18,7 @@ INSTALL_TIMEOUT = 120
 st.markdown("""
     <style>
     .main {
-        background-color: #f9f9f9;
+        background-color: #403f3f;
         font-family: 'Arial', sans-serif;
     }
     .stTextInput, .stButton, .stTextArea {
@@ -37,7 +37,7 @@ biobricks_token = st.sidebar.text_input("BioBricks Token", type="password")
 query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
 
 # Streamlit App setup
-st.title("📊 WikiPathways Query Tool")
+st.title("📊 WikiPathways Query Tool\n\n")
 st.markdown("""
 This app integrates **OpenAI's API** with the **WikiPathways SPARQL endpoint** for querying biological pathways using natural language queries.
 """)
@@ -88,7 +88,7 @@ def install_wikipathways():
 def query_openai(api_key, query_input):
     """Send natural language query to OpenAI and get SPARQL query."""
     openai.api_key = api_key
-    st.success("🔍 OpenAI Configured successfully!")
+    st.success("✔️ OpenAI Configured successfully!")
     natural_query = f'Use WikiPathways SPARQL Endpoint to retrieve the following information and include the necessary prefix lines.\n{query_input}'
     
     try:
