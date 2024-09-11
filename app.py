@@ -45,6 +45,8 @@ if st.button("Generate and Execute Query"):
 
             # Proceed with loading WikiPathways data and querying
             wikipathways = biobricks.assets('wikipathways')
+            st.write(vars(wikipathways))  # This will print the attributes of the object
+
             store = HDTStore(wikipathways.wikipathways_hdt)
             g = Graph(store=store)
 
