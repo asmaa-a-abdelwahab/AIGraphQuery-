@@ -27,7 +27,7 @@ if st.button("Generate and Execute Query"):
     else:
         try:
             # Instead of bb.configure(), let's set the token as an environment variable and directly fetch assets
-            subprocess.run(['biobricks', 'configure', '--token', f'{biobricks_token}'], shell=True)
+            subprocess.run(['biobricks', 'configure', '--token', {biobricks_token}], shell=True)
             st.info("Execution started...")
 
             # Load WikiPathways data without calling bb.configure()
