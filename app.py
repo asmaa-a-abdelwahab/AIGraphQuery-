@@ -91,4 +91,4 @@ if st.button("Generate and Execute Query"):
         except pexpect.exceptions.ExceptionPexpect as e:
             st.error(f"An error occurred while configuring BioBricks: {str(e)}")
         except Exception as e:
-            st
+            st.error(f"An error occurred: {str(e)}")
