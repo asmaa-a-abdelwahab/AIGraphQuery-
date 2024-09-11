@@ -32,7 +32,7 @@ if st.button("Generate and Execute Query"):
 
             # Call biobricks configure
             configure_result = subprocess.run(
-                ['biobricks', 'configure', '--token', biobricks_token, '--bblib', '.', '--overwrite', 'y'],
+                ['biobricks', 'configure', '--overwrite', 'y', '--token', biobricks_token, '--bblib', '.'],
                 capture_output=True, text=True
             )
 
