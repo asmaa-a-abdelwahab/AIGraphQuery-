@@ -45,7 +45,7 @@ if st.button("Generate and Execute Query"):
 
                 # Step 2: Handle the path configuration prompt
                 # index = child.expect(['Choose path to store bricks:', pexpect.TIMEOUT, pexpect.EOF])
-                # st.write(index)
+                st.write(index)
                 if index == 1:
                     child.sendline('.')  # Send the path (current directory)
                     st.info("Path configuration completed.")
