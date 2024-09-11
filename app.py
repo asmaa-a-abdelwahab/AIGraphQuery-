@@ -14,7 +14,8 @@ st.title("WikiPathways Query Tool")
 st.write("This app integrates OpenAI's API with WikiPathways SPARQL endpoint for querying biological pathways using natural language.")
 
 # Input fields for OpenAI API Key and BioBricks Token
-openai.api_key = st.text_input("OpenAI API Key", type="password")
+api_key = st.text_input("OpenAI API Key", type="password")
+openai.api_key = api_key
 biobricks_token = st.text_input("BioBricks Token", type="password")
 
 # Input for the natural language query
