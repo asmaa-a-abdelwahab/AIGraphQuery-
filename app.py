@@ -30,7 +30,7 @@ st.markdown("""
     /* Code block style */
     .stCode {
         background-color: #0a0a0a;
-        color: green;
+        color: black;
         border-radius: 1px;
         padding: 3px;
     }
