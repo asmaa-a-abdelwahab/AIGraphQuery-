@@ -28,11 +28,11 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Use pexpect to run the biobricks configure command with token input
-            child = pexpect.spawn('biobricks configure', timeout=30)  # Set a longer timeout (e.g., 120 seconds)
-            child.expect('Input a token from biobricks.ai/token:')  # Adjust the prompt to match what's actually expected
+            child = pexpect.spawn('biobricks configure')  # Set a longer timeout (e.g., 120 seconds)
+            child.expect('Input a token from biobricks.ai / token:')  # Adjust the prompt to match what's actually expected
             child.sendline(biobricks_token)  # Send the BioBricks token
 
-            child.expect('Enter bblib Path:')  # Expect the path input prompt
+            child.expect('Choose path to store bricks:')  # Expect the path input prompt
             child.sendline('.')  # Send the path (current directory)
 
             # Wait for the command to complete
