@@ -1,3 +1,4 @@
+import pexpect
 import openai
 import pandas as pd
 import streamlit as st
@@ -26,21 +27,14 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Run the command
-            process = Popen(['biobricks', 'configure', '--token', biobricks_token, '--bblib', '.'], stdout=PIPE,
-                            stderr=PIPE)
+            # Run the command with pexpect to handle interactive prompts
+            child = pexpect.spawn('biobricks configure --bblib .')
+            child.expect('Enter your token:')  # Modify this to match the actual prompt
+            child.sendline(biobricks_token)
 
-            # Get the output and error streams
-            stdout, stderr = process.communicate()
-
-            # Handle the output
-            print("stdout:", stdout.decode('utf-8'))
-            print("stderr:", stderr.decode('utf-8'))
-
-            if process.returncode == 0:
-                print("BioBricks configuration successful.")
-            else:
-                print(f"Error: {stderr.decode('utf-8')}")
+            child.expect(pexpect.EOF)  # Wait for the command to finish
+            output = child.before.decode('utf-8')
+            print(output)
 
             # Load WikiPathways data
             wikipathways = biobricks.assets('wikipathways')
