@@ -29,7 +29,7 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Run the command
-            result = subprocess.run(['biobricks configure', '--token', biobricks_token, '--bblib', './'], text=True)
+            result = subprocess.run(['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', './'], text=True)
 
             if result.returncode == 0:
                 print("BioBricks configuration successful.")
