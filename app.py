@@ -30,9 +30,9 @@ st.markdown("""
     /* Code block style */
     .stCode {
         background-color: #0a0a0a;
-        color: black;
-        border-radius: 2px;
-        padding: 5px;
+        color: green;
+        border-radius: 1px;
+        padding: 3px;
     }
     .stDataframe {
         background-color: #0a0a0a;
