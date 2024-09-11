@@ -27,21 +27,44 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Use pexpect to run the biobricks configure command with token input
-            child = pexpect.spawn('biobricks configure --overwrite y', timeout=20)
-            child.logfile = sys.stdout.buffer  # Log the output for debugging
-            st.write(child.logfile)
+            try:
+                st.info("Running BioBricks configure command...")
+                # Extend the timeout to 120 seconds
+                child = pexpect.spawn('biobricks configure --overwrite y', timeout=120)
+                child.logfile = sys.stdout.buffer  # Log the output for debugging
 
-            # Handle prompts from biobricks configure
-            child.expect('Input a token from biobricks.ai/token:')
-            child.sendline(biobricks_token)  # Send the BioBricks token
+                # Step 1: Handle the token input
+                index = child.expect(['Input a token from biobricks.ai/token:', pexpect.TIMEOUT, pexpect.EOF])
+                if index == 0:
+                    child.sendline(biobricks_token)  # Send the BioBricks token
+                    st.info("BioBricks token sent.")
+                else:
+                    st.error("Token prompt not found. Process timed out or exited unexpectedly.")
+                    st.stop()
 
-            # Handle the path configuration prompt
-            child.expect('Choose path to store bricks:')
-            child.sendline('.')  # Choose current directory
+                # Step 2: Handle the path configuration prompt
+                index = child.expect(['Choose path to store bricks:', pexpect.TIMEOUT, pexpect.EOF])
+                if index == 0:
+                    child.sendline('.')  # Send the path (current directory)
+                    st.info("Path configuration completed.")
+                else:
+                    st.error("Path configuration prompt not found. Process timed out or exited unexpectedly.")
+                    st.stop()
 
-            # Wait for the configuration process to finish
-            child.expect(pexpect.EOF)
-            st.success("BioBricks configuration successful!")
+                # Step 3: Wait for the command to complete
+                index = child.expect([pexpect.EOF, pexpect.TIMEOUT])
+                if index == 0:
+                    st.success("BioBricks configuration successful!")
+                else:
+                    st.error("Configuration did not complete. Process timed out.")
+
+            except pexpect.exceptions.TIMEOUT:
+                st.error("BioBricks configuration timed out.")
+            except pexpect.exceptions.ExceptionPexpect as e:
+                st.error(f"An error occurred while configuring BioBricks: {str(e)}")
+            except Exception as e:
+                st.error(f"An unexpected error occurred: {str(e)}")
+
 
             # Proceed with loading WikiPathways data and querying
             wikipathways = biobricks.assets('wikipathways')
