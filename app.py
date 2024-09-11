@@ -29,12 +29,12 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Run the command
-            result = subprocess.run(['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', './'], text=True)
+            subprocess.run(['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', './'], text=True)
 
-            if result.returncode == 0:
-                print("BioBricks configuration successful.")
-            else:
-                print(f"Error: {result.stderr}")
+            # if result.returncode == 0:
+            #     print("BioBricks configuration successful.")
+            # else:
+            #     print(f"Error: {result.stderr}")
 
             # Load WikiPathways data
             wikipathways = biobricks.assets('wikipathways')
