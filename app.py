@@ -14,18 +14,39 @@ OPENAI_ASSISTANT_MSG = "You are a helpful assistant."
 CONFIGURE_TIMEOUT = 120
 INSTALL_TIMEOUT = 120
 
-# Custom CSS for style
+# Custom CSS for styling the sidebar and header
 st.markdown("""
     <style>
-    .main {
-        background-color: #f9f9f9;
-        font-family: 'Arial', sans-serif;
+    /* Sidebar and Header Styling */
+    .sidebar .sidebar-content {
+        background-color: #333333;  /* Dark gray for sidebar background */
+        color: white;  /* White text color for sidebar */
     }
+    .sidebar .sidebar-title {
+        color: white;  /* White text color for sidebar title */
+    }
+    .main {
+        background-color: #f9f9f9;  /* Light background for main content */
+        color: black;  /* Black text for content */
+    }
+    .css-18e3th9 {
+        background-color: #333333;  /* Dark gray for header background */
+        color: white;  /* White text color for header */
+    }
+    /* Text input and button styling */
     .stTextInput, .stButton, .stTextArea {
         padding: 10px;
+        background-color: #222222;
+        color: white;
+        border-radius: 5px;
     }
     .stProgress {
         color: #4CAF50;
+    }
+    /* Style for Code Block */
+    .stCode {
+        background-color: #2e2e2e;  /* Dark gray for code block */
+        color: white;  /* White text color for code */
     }
     </style>
 """, unsafe_allow_html=True)
@@ -39,7 +60,7 @@ query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter 
 # Streamlit App setup
 st.title("📊 WikiPathways Query Tool")
 st.markdown("""
-This app integrates **OpenAI's API** with the **WikiPathways SPARQL endpoint** for querying biological pathways using natural language.
+This app integrates **OpenAI's API** with the **WikiPathways SPARQL endpoint** for querying biological pathways using natural language queries.
 """)
 
 # Progress feedback
