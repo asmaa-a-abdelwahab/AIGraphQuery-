@@ -40,7 +40,7 @@ if st.button("Generate and Execute Query"):
             child.sendline('.')  # Send the path (current directory)
             st.success("BioBricks configuration successful!")
 
-            subprocess.run(['biobricks install', 'wikipathways'], shell=True)
+            subprocess.run(['biobricks install wikipathways'], shell=True)
 
 
             # Proceed with loading WikiPathways data and querying
