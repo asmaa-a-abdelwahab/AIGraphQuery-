@@ -24,13 +24,12 @@ if st.button("Generate and Execute Query"):
         st.error("Please ensure all fields are filled out.")
     else:
         try:
-            # Set the BioBricks token as an environment variable
+            # Instead of bb.configure(), let's set the token as an environment variable and directly fetch assets
             os.environ['BIOBRICKS_TOKEN'] = biobricks_token
-            bb.configure()  # Now it uses the token from the environment
 
             st.info("Execution started...")
 
-            # Load WikiPathways data
+            # Load WikiPathways data without calling bb.configure()
             wikipathways = bb.assets('wikipathways')
             store = HDTStore(wikipathways.wikipathways_hdt)
             g = Graph(store=store)
