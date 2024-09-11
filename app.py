@@ -28,13 +28,14 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Run the command
-            subprocess.run(['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', './'], shell=True)
+            # Use pexpect to run the biobricks configure command with token input
+            child = pexpect.spawn('biobricks configure --bblib ./')
+            child.expect('Enter your BioBricks token:')  # Expect the token prompt
+            child.sendline(biobricks_token)  # Send the token
 
-            # if result.returncode == 0:
-            #     print("BioBricks configuration successful.")
-            # else:
-            #     print(f"Error: {result.stderr}")
+            # Wait for the command to complete
+            child.expect(pexpect.EOF)
+            st.success("BioBricks configuration successful!")
 
             # Load WikiPathways data
             wikipathways = biobricks.assets('wikipathways')
@@ -82,5 +83,7 @@ if st.button("Generate and Execute Query"):
 
         except subprocess.TimeoutExpired:
             st.error("BioBricks configuration timed out.")
+        except pexpect.exceptions.ExceptionPexpect as e:
+            st.error(f"An error occurred while configuring BioBricks: {str(e)}")
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
