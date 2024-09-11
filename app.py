@@ -1,11 +1,10 @@
-import os
 import openai
 import pandas as pd
 import streamlit as st
 from rdflib import Graph
 from rdflib_hdt import HDTStore
 import biobricks
-import subprocess
+from subprocess import Popen, PIPE
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
@@ -27,13 +26,21 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Use os.system to run the command
-            exit_code = os.system(f'biobricks configure --token {biobricks_token} --bblib .')
+            # Run the command
+            process = Popen(['biobricks', 'configure', '--token', biobricks_token, '--bblib', '.'], stdout=PIPE,
+                            stderr=PIPE)
 
-            if exit_code == 0:
-                print("Command executed successfully.")
+            # Get the output and error streams
+            stdout, stderr = process.communicate()
+
+            # Handle the output
+            print("stdout:", stdout.decode('utf-8'))
+            print("stderr:", stderr.decode('utf-8'))
+
+            if process.returncode == 0:
+                print("BioBricks configuration successful.")
             else:
-                print(f"Command failed with exit code {exit_code}")
+                print(f"Error: {stderr.decode('utf-8')}")
 
             # Load WikiPathways data
             wikipathways = biobricks.assets('wikipathways')
