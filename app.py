@@ -28,7 +28,7 @@ if st.button("Generate and Execute Query"):
 
             # Configure BioBricks with subprocess call
             configure_result = subprocess.run(
-                ['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', '.'],
+                ['biobricks', 'configure', '--token', biobricks_token, '--bblib', '.'],
                 capture_output=True, text=True, timeout=60  # Adding a timeout for the subprocess
             )
 
