@@ -6,3 +6,4 @@ pandas
 rdflib
 rdflib_hdt
 SPARQLWrapper
+streamlit
