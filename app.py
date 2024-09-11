@@ -55,7 +55,7 @@ biobricks_token = st.sidebar.text_input("BioBricks Token", type="password")
 query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
 
 # Streamlit App setup
-st.title("📊 WikiPathways Query Tool\n\n")
+st.title("🧬 WikiPathways Query Tool\n\n")
 st.markdown("""
 This app integrates **OpenAI's API** with the **WikiPathways SPARQL endpoint** for querying biological pathways using natural language queries.
 """)
