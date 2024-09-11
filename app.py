@@ -14,7 +14,7 @@ st.title("WikiPathways Query Tool")
 st.write("This app integrates OpenAI's API with WikiPathways SPARQL endpoint for querying biological pathways using natural language.")
 
 # Input fields for OpenAI API Key and BioBricks Token
-api_key = st.text_input("OpenAI API Key", type="password")
+openai.api_key = st.text_input("OpenAI API Key", type="password")
 biobricks_token = st.text_input("BioBricks Token", type="password")
 
 # Input for the natural language query
@@ -40,8 +40,6 @@ if st.button("Generate and Execute Query"):
             child.sendline('.')  # Send the path (current directory)
             st.success("BioBricks configuration successful!")
 
-            # pexpect.spawn('biobricks install wikipathways', timeout=120)
-            # biobricks.install('wikipathways')
             subprocess.run(
                 ['biobricks', 'install', 'wikipathways'],
                 capture_output=True, text=True, timeout=120  # Adjust timeout as needed
