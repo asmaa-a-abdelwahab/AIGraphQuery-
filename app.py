@@ -29,9 +29,12 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Use pexpect to run the biobricks configure command with token input
-            child = pexpect.spawn('biobricks configure --bblib ./')
+            child = pexpect.spawn('biobricks configure')
             child.expect('Enter your BioBricks token:')  # Expect the token prompt
             child.sendline(biobricks_token)  # Send the token
+
+            child.expect('Enter bblib Path:')  # Expect the token prompt
+            child.sendline('.')  # Send the token
 
             # Wait for the command to complete
             child.expect(pexpect.EOF)
