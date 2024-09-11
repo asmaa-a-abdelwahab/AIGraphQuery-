@@ -40,7 +40,8 @@ if st.button("Generate and Execute Query"):
             child.sendline('.')  # Send the path (current directory)
             st.success("BioBricks configuration successful!")
 
-            pexpect.spawn('biobricks install https://github.com/biobricks-ai/wikipathways#3f13719815e77abfb8332bf99d1798d257b22d2a', timeout=120)
+            # pexpect.spawn('biobricks install wikipathways', timeout=120)
+            biobricks.install('wikipathways')
 
             # Proceed with loading WikiPathways data and querying
             wikipathways = biobricks.assets('wikipathways')
