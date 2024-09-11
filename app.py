@@ -7,6 +7,7 @@ from rdflib import Graph
 from rdflib_hdt import HDTStore
 import biobricks
 import pexpect
+import subprocess
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
@@ -37,8 +38,9 @@ if st.button("Generate and Execute Query"):
             child.sendline(biobricks_token)  # Send the BioBricks token
             time.sleep(1)
             child.sendline('.')  # Send the path (current directory)
-                
             st.success("BioBricks configuration successful!")
+
+            subprocess.run(['biobricks install', 'wikipathways'], shell=True)
 
 
             # Proceed with loading WikiPathways data and querying
