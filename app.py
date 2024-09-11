@@ -29,6 +29,7 @@ if st.button("Generate and Execute Query"):
             # Use pexpect to run the biobricks configure command with token input
             child = pexpect.spawn('biobricks configure --overwrite y', timeout=20)
             child.logfile = sys.stdout.buffer  # Log the output for debugging
+            st.write(child.logfile)
 
             # Handle prompts from biobricks configure
             child.expect('Input a token from biobricks.ai/token:')
