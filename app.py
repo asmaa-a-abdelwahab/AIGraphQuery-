@@ -115,7 +115,8 @@ if st.button("Generate and Execute Query"):
             sparql_query = query_openai(api_key, query_input)
             if sparql_query and '```sparql' in sparql_query:
                 sparql_query = sparql_query.split('```sparql')[1].split('```')[0].strip()
-                st.info(f"SPARQL Query extracted:\n{sparql_query}")
+                st.info("SPARQL Query extracted:")
+                st.code(f"{sparql_query}")
 
                 # Step 5: Execute SPARQL query
                 run_sparql_query(graph, sparql_query)
