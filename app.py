@@ -1,4 +1,3 @@
-import sys
 import pexpect
 import openai
 import pandas as pd
@@ -27,7 +26,7 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Use pexpect to run the biobricks configure command with token input
-            child = pexpect.spawn('biobricks configure')
+            child = pexpect.spawn('biobricks configure', timeout=120)
             child.logfile = sys.stdout.buffer  # Log the output for debugging
 
             # Adjust prompt matching based on the actual output you observed
@@ -85,8 +84,6 @@ if st.button("Generate and Execute Query"):
             else:
                 st.error("SPARQL block not found in the response.")
 
-        except subprocess.TimeoutExpired:
-            st.error("BioBricks configuration timed out.")
         except pexpect.exceptions.TIMEOUT:
             st.error("BioBricks configuration timed out. Please ensure the token is correct.")
         except pexpect.exceptions.ExceptionPexpect as e:
