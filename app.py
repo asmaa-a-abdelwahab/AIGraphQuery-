@@ -27,7 +27,7 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Use pexpect to run the biobricks configure command with token input
-            child = pexpect.spawn('biobricks configure', timeout=120)
+            child = pexpect.spawn('biobricks configure')
             child.logfile = sys.stdout.buffer  # Log the output for debugging
 
             # Adjust prompt matching based on the actual output you observed
