@@ -39,7 +39,7 @@ class WikiPathwaysQueryTool:
         st.info("Execution started...")
 
         # Configure BioBricks using the token from the input field
-        bb.configure(token=self.biobricks_token)
+        bb.configure(self.biobricks_token)
 
         wikipathways = bb.assets('wikipathways')
         store = HDTStore(wikipathways.wikipathways_hdt)
