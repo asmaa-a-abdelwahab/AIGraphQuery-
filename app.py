@@ -27,6 +27,7 @@ query_input = st.text_area('Natural Language Query', placeholder='Enter your SPA
 def configure_biobricks(token):
     """Configure BioBricks with the provided token."""
     try:
+        st.header("Configuration Steps:")
         child = pexpect.spawn('biobricks configure --overwrite y', timeout=CONFIGURE_TIMEOUT)
         child.logfile = sys.stdout.buffer  # Log output for debugging
 
@@ -60,6 +61,7 @@ def install_wikipathways():
 def query_openai(api_key, query_input):
     """Send natural language query to OpenAI and get SPARQL query."""
     openai.api_key = api_key
+    st.success("OpenAI Configuration successful!")
     natural_query = f'Use WikiPathways SPARQL Endpoint to retrieve the following information and include the necessary prefix lines.\n{query_input}'
     
     try:
@@ -72,7 +74,7 @@ def query_openai(api_key, query_input):
             max_tokens=400
         )
         sparql_query = response['choices'][0]['message']['content']
-        st.success("Response from OpenAI received.")
+        # st.success("Response from OpenAI received.")
         return sparql_query
     except Exception as e:
         st.error(f"An error occurred while querying OpenAI: {str(e)}")
