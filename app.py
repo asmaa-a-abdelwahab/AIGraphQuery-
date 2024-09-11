@@ -28,9 +28,11 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Ensure that any old configuration is removed
-            config_dir = os.path.expanduser("~/.biobricks")  # Assuming the configuration is stored here
-            if os.path.exists(config_dir):
-                shutil.rmtree(config_dir)  # Remove the entire directory
+            st.cache_data.clear()
+
+            # config_dir = os.path.expanduser("~/.biobricks")  # Assuming the configuration is stored here
+            # if os.path.exists(config_dir):
+            #     shutil.rmtree(config_dir)  # Remove the entire directory
 
             # Use subprocess to run the biobricks configure command with the token
             os.environ['BIOBRICKS_TOKEN'] = biobricks_token  # Set token as an environment variable
