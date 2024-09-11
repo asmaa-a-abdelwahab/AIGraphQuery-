@@ -27,15 +27,20 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Configure BioBricks with subprocess call
-            subprocess.run(f'biobricks configure --token {biobricks_token} --bblib .', shell=True, check=True)
+            result = subprocess.run(
+                f'biobricks configure --token {biobricks_token} --bblib .',
+                shell=True, capture_output=True, text=True, timeout=60  # Adding timeout for safety
+            )
 
-            # Debugging output for BioBricks configuration
-            # st.text(f"BioBricks Configuration stdout: {configure_result.stdout}")
-            # st.text(f"BioBricks Configuration stderr: {configure_result.stderr}")
+            # Capture and display stdout and stderr for debugging
+            st.write(f"Command stdout: {result.stdout}")
+            st.write(f"Command stderr: {result.stderr}")
 
-            # if configure_result.returncode != 0:
-                # st.error(f"BioBricks configuration failed: {configure_result.stderr}")
-                # st.stop()
+            # Check if command was successful
+            if result.returncode == 0:
+                st.success("BioBricks configuration successful.")
+            else:
+                st.error(f"BioBricks configuration failed with code {result.returncode}")
 
             st.info("Execution started...")
 
