@@ -5,7 +5,8 @@ import streamlit as st
 from rdflib import Graph
 from rdflib_hdt import HDTStore
 import biobricks
-from subprocess import Popen, PIPE
+import subprocess
+import shlex
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
@@ -27,14 +28,17 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Run the command with pexpect to handle interactive prompts
-            child = pexpect.spawn('biobricks configure --bblib .')
-            child.expect('Enter your token:')  # Modify this to match the actual prompt
-            child.sendline(biobricks_token)
+            # Prepare the command with shlex to handle special characters
+            command = f'biobricks configure --token {biobricks_token} --bblib .'
+            cmd = shlex.split(command)
 
-            child.expect(pexpect.EOF)  # Wait for the command to finish
-            output = child.before.decode('utf-8')
-            print(output)
+            # Run the command
+            result = subprocess.run(cmd, capture_output=True, text=True)
+
+            if result.returncode == 0:
+                print("BioBricks configuration successful.")
+            else:
+                print(f"Error: {result.stderr}")
 
             # Load WikiPathways data
             wikipathways = biobricks.assets('wikipathways')
