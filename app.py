@@ -1,3 +1,4 @@
+import sys
 import openai
 import pandas as pd
 import streamlit as st
@@ -5,7 +6,6 @@ from rdflib import Graph
 from rdflib_hdt import HDTStore
 import biobricks
 import pexpect
-import os
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
