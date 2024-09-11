@@ -10,8 +10,7 @@ import shlex
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
-st.write(
-    "This app integrates OpenAI's API with WikiPathways SPARQL endpoint for querying biological pathways using natural language.")
+st.write("This app integrates OpenAI's API with WikiPathways SPARQL endpoint for querying biological pathways using natural language.")
 
 # Input fields for OpenAI API Key and BioBricks Token
 api_key = st.text_input("OpenAI API Key", type="password")
@@ -29,12 +28,12 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Use pexpect to run the biobricks configure command with token input
-            child = pexpect.spawn('biobricks configure')
-            child.expect('Enter your BioBricks token:')  # Expect the token prompt
-            child.sendline(biobricks_token)  # Send the token
+            child = pexpect.spawn('biobricks configure', timeout=30)  # Set a longer timeout (e.g., 120 seconds)
+            child.expect('Input a token from biobricks.ai/token:')  # Adjust the prompt to match what's actually expected
+            child.sendline(biobricks_token)  # Send the BioBricks token
 
-            child.expect('Enter bblib Path:')  # Expect the token prompt
-            child.sendline('.')  # Send the token
+            child.expect('Enter bblib Path:')  # Expect the path input prompt
+            child.sendline('.')  # Send the path (current directory)
 
             # Wait for the command to complete
             child.expect(pexpect.EOF)
@@ -86,6 +85,8 @@ if st.button("Generate and Execute Query"):
 
         except subprocess.TimeoutExpired:
             st.error("BioBricks configuration timed out.")
+        except pexpect.exceptions.TIMEOUT:
+            st.error("BioBricks configuration timed out. Please ensure the token is correct.")
         except pexpect.exceptions.ExceptionPexpect as e:
             st.error(f"An error occurred while configuring BioBricks: {str(e)}")
         except Exception as e:
