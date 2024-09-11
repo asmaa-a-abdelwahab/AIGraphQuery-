@@ -35,6 +35,7 @@ if st.button("Generate and Execute Query"):
 
                 # Step 1: Handle the token input
                 index = child.expect(['Input a token from biobricks.ai/token:', pexpect.TIMEOUT, pexpect.EOF])
+                st.write(index)
                 if index == 0:
                     child.sendline(biobricks_token)  # Send the BioBricks token
                     st.info("BioBricks token sent.")
@@ -44,6 +45,7 @@ if st.button("Generate and Execute Query"):
 
                 # Step 2: Handle the path configuration prompt
                 index = child.expect(['Choose path to store bricks:', pexpect.TIMEOUT, pexpect.EOF])
+                st.write(index)
                 if index == 0:
                     child.sendline('.')  # Send the path (current directory)
                     st.info("Path configuration completed.")
