@@ -134,7 +134,7 @@ def run_sparql_query(graph, sparql_query):
         if df.empty:
             st.warning("⚠️ No data retrieved from the query.")
         else:
-            st.subheader("📊 Data retrieved from WikiPathways:")
+            st.subheader("📊 Data Retrieved from WikiPathways:")
             st.dataframe(df)
     except Exception as e:
         st.error(f"⚠️ An error occurred while executing SPARQL query: {str(e)}")
@@ -163,7 +163,7 @@ if st.button("🚀 Generate and Execute Query"):
             sparql_query = query_openai(api_key, query_input)
             if sparql_query and '```sparql' in sparql_query:
                 sparql_query = sparql_query.split('```sparql')[1].split('```')[0].strip()
-                st.subheader("📝 SPARQL Query extracted:")
+                st.subheader("📝 SPARQL Query Generated:")
                 st.code(f"{sparql_query}")
 
                 # Step 5: Execute SPARQL query
