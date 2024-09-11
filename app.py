@@ -41,7 +41,11 @@ if st.button("Generate and Execute Query"):
             st.success("BioBricks configuration successful!")
 
             # pexpect.spawn('biobricks install wikipathways', timeout=120)
-            biobricks.install('wikipathways')
+            # biobricks.install('wikipathways')
+            subprocess.run(
+                ['biobricks', 'install', 'wikipathways'],
+                capture_output=True, text=True, timeout=120  # Adjust timeout as needed
+            )
 
             # Proceed with loading WikiPathways data and querying
             wikipathways = biobricks.assets('wikipathways')
