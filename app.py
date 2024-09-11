@@ -31,8 +31,14 @@ st.markdown("""
     .stCode {
         background-color: #0a0a0a;
         color: black;
-        border-radius: 5px;
-        padding: 10px;
+        border-radius: 2px;
+        padding: 5px;
+    }
+    .stDataframe {
+        background-color: #0a0a0a;
+        color: black;
+        border-radius: 2px;
+        padding: 5px;
     }
     /* Dark theme for sidebar */
     .sidebar sidebarcontent {
