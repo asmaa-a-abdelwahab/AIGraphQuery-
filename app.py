@@ -1,11 +1,9 @@
-import os
 import openai
-import textwrap
 import pandas as pd
 import streamlit as st
 from rdflib import Graph
 from rdflib_hdt import HDTStore
-import biobricks as bb
+import biobricks
 import subprocess
 
 
@@ -31,7 +29,7 @@ if st.button("Generate and Execute Query"):
             st.info("Execution started...")
 
             # Load WikiPathways data without calling bb.configure()
-            wikipathways = bb.assets('wikipathways')
+            wikipathways = biobricks.assets('wikipathways')
             store = HDTStore(wikipathways.wikipathways_hdt)
             g = Graph(store=store)
 
