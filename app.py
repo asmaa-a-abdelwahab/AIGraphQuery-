@@ -15,10 +15,6 @@ st.write("This app integrates OpenAI's API with WikiPathways SPARQL endpoint for
 
 # Input fields for OpenAI API Key and BioBricks Token
 api_key = st.text_input("OpenAI API Key", type="password")
-# Set the OpenAI API Key once the user inputs it
-if api_key:
-    openai.api_key = api_key
-    st.success("OpenAI API Key is set.")
 biobricks_token = st.text_input("BioBricks Token", type="password")
 
 # Input for the natural language query
@@ -30,10 +26,15 @@ if st.button("Generate and Execute Query"):
         st.error("Please ensure all fields are filled out.")
     else:
         try:
+
+            # Set the OpenAI API Key once the user inputs it
+            if api_key:
+                openai.api_key = api_key
+                st.success("OpenAI API Key is set.")
+
             # st.info("Configuring BioBricks...")
 
             # Use pexpect to run the biobricks configure command with token input
-
             child = pexpect.spawn('biobricks configure --overwrite y', timeout=120)
             child.logfile = sys.stdout.buffer  # Log the output for debugging
 
