@@ -8,9 +8,9 @@ textColor = "#333333"  # Dark grey text for better contrast on light background
 # Sidebar Text and Highlight Customization
 [theme.sidebar]
 backgroundColor = "#2E3B4E"  # Darker background for sidebar to create contrast
-textColor = "#F0F0F0"  # Light color for sidebar text to contrast with the dark background
+textColor = "#FFFFFF"  # Light color for sidebar text to contrast with the dark background
 highlightColor = "#1E90FF"  # Same as primaryColor for consistency
-headerColor = "#F0F0F0"  # Light color for sidebar headers
+headerColor = "#FFFFFF"  # Light color for sidebar headers
 
 # Button Styling
 [theme.button]
