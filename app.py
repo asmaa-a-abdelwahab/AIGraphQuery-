@@ -18,7 +18,7 @@ api_key = st.text_input("OpenAI API Key", type="password")
 biobricks_token = st.text_input("BioBricks Token", type="password")
 
 # Using subprocess to run bb.configure() and pass the token
-process = subprocess.Popen(['bb', 'configure'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+process = subprocess.Popen(['biobricks', 'configure'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 stdout, stderr = process.communicate(input=biobricks_token)
 
 # Input for the natural language query
