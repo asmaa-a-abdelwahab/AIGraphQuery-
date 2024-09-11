@@ -13,7 +13,7 @@ st.write(
 
 # Input fields for OpenAI API Key and BioBricks Token
 api_key = st.text_input("OpenAI API Key", type="password")
-# biobricks_token = st.text_input("BioBricks Token", type="password")
+biobricks_token = st.text_input("BioBricks Token", type="password")
 
 # Input for the natural language query
 query_input = st.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
@@ -27,13 +27,12 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Configure BioBricks with subprocess call
-            configure_result = subprocess.run(['biobricks', 'configure', '--token', st.text_input("BioBricks Token", type="password"), '--bblib', '.'],
-                capture_output=True, text=True, timeout=60  # Adding a timeout for the subprocess
-            )
+            subprocess.run(['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', '.'])
+
 
             # Debugging output for BioBricks configuration
-            st.text(f"BioBricks Configuration stdout: {configure_result.stdout}")
-            st.text(f"BioBricks Configuration stderr: {configure_result.stderr}")
+            # st.text(f"BioBricks Configuration stdout: {configure_result.stdout}")
+            # st.text(f"BioBricks Configuration stderr: {configure_result.stderr}")
 
             if configure_result.returncode != 0:
                 st.error(f"BioBricks configuration failed: {configure_result.stderr}")
