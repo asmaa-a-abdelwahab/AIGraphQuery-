@@ -14,48 +14,51 @@ OPENAI_ASSISTANT_MSG = "You are a helpful assistant."
 CONFIGURE_TIMEOUT = 120
 INSTALL_TIMEOUT = 120
 
-# Custom CSS for styling the sidebar and header
+# Custom CSS for dark sidebar and top bar
 st.markdown("""
     <style>
-    /* Sidebar and Header Styling */
+    /* Sidebar and header styling */
     .sidebar .sidebar-content {
-        background-color: #333333;  /* Dark gray for sidebar background */
-        color: white;  /* White text color for sidebar */
-    }
-    .sidebar .sidebar-title {
-        color: white;  /* White text color for sidebar title */
-    }
-    .main {
-        background-color: #f9f9f9;  /* Light background for main content */
-        color: black;  /* Black text for content */
+        background-color: #1c1c1c;  /* Dark gray for sidebar */
+        color: white;  /* White text for better contrast */
     }
     .css-18e3th9 {
-        background-color: #333333;  /* Dark gray for header background */
-        color: white;  /* White text color for header */
+        background-color: #1c1c1c;  /* Dark gray for header */
+        color: white;  /* White text color */
     }
-    /* Text input and button styling */
-    .stTextInput, .stButton, .stTextArea {
-        padding: 10px;
-        background-color: #222222;
-        color: white;
-        border-radius: 5px;
+    .stTextInput, .stTextArea {
+        background-color: #333333;  /* Darker input boxes */
+        color: white;  /* White text for input fields */
+        border-radius: 5px;  /* Rounded corners */
     }
-    .stProgress {
-        color: #4CAF50;
+    .stButton button {
+        background-color: #4CAF50;  /* Green button color */
+        color: white;  /* White text on the button */
+        border-radius: 10px;  /* Rounded buttons */
     }
-    /* Style for Code Block */
+    .stProgress > div > div {
+        background-color: #4CAF50;  /* Progress bar color */
+    }
     .stCode {
         background-color: #2e2e2e;  /* Dark gray for code block */
-        color: white;  /* White text color for code */
+        color: white;  /* White text for code block */
+        border-radius: 5px;  /* Rounded corners */
+    }
+    .css-1q8dd3e {
+        background-color: white !important; /* Main area stays white */
+    }
+    .stSuccess, .stInfo, .stWarning, .stError {
+        color: #333333;
+        font-weight: bold;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # Sidebar for input fields
 st.sidebar.title("Configuration")
-api_key = st.sidebar.text_input("OpenAI API Key", type="password")
-biobricks_token = st.sidebar.text_input("BioBricks Token", type="password")
-query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
+api_key = st.sidebar.text_input("🔑 OpenAI API Key", type="password")
+biobricks_token = st.sidebar.text_input("🧬 BioBricks Token", type="password")
+query_input = st.sidebar.text_area('Natural Language Query 📝', placeholder='Enter your SPARQL-like query here...')
 
 # Streamlit App setup
 st.title("📊 WikiPathways Query Tool")
