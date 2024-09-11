@@ -1,0 +1,9 @@
+[theme]
+# Primary background and text settings
+primaryColor = "#4CAF50"  # Customize your app's primary color (e.g., buttons, highlights)
+backgroundColor = "#FFFFFF"  # Main background color for the content area
+secondaryBackgroundColor = "#1F1F1F"  # Sidebar background color
+textColor = "#FFFFFF"  # Text color for the sidebar and other secondary areas
+
+# Font settings
+font = "sans serif"  # Options: "sans serif", "serif", "monospace"
