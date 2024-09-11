@@ -6,6 +6,7 @@ from rdflib_hdt import HDTStore
 import biobricks
 import subprocess
 import os
+import shutil
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
@@ -26,9 +27,17 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Automatically answer "yes" to the overwrite prompt using echo
+            # Ensure that any old configuration is removed
+            config_dir = os.path.expanduser("~/.biobricks")  # Assuming the configuration is stored here
+            if os.path.exists(config_dir):
+                shutil.rmtree(config_dir)  # Remove the entire directory
+
+            # Use subprocess to run the biobricks configure command with the token
+            os.environ['BIOBRICKS_TOKEN'] = biobricks_token  # Set token as an environment variable
+
+            # Call biobricks configure
             configure_result = subprocess.run(
-                ['bash', '-c', f'echo "y" | biobricks configure --token {biobricks_token} --bblib .'],
+                ['biobricks', 'configure', '--token', biobricks_token, '--bblib', '.'],
                 capture_output=True, text=True
             )
 
