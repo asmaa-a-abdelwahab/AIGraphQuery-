@@ -1,3 +1,4 @@
+import sys
 import pexpect
 import openai
 import pandas as pd
