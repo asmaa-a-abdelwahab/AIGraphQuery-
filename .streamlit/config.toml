@@ -1,9 +1,36 @@
 [theme]
-# Primary background and text settings
-primaryColor = "#4CAF50"  # Customize your app's primary color (e.g., buttons, highlights)
-backgroundColor = "#FFFFFF"  # Main background color for the content area
-secondaryBackgroundColor = "#1F1F1F"  # Sidebar background color
-textColor = "#FFFFFF"  # Text color for the sidebar and other secondary areas
+# Primary UI Colors
+primaryColor = "#1E90FF"  # A calm blue for primary UI elements (buttons, links, etc.)
+backgroundColor = "#F0F0F0"  # Light grey background for better readability and reduced eye strain
+secondaryBackgroundColor = "#2E3B4E"  # Darker color for the sidebar
+textColor = "#333333"  # Dark grey text for better contrast on light background
+
+# Sidebar Text and Highlight Customization
+[theme.sidebar]
+backgroundColor = "#2E3B4E"  # Darker background for sidebar to create contrast
+textColor = "#F0F0F0"  # Light color for sidebar text to contrast with the dark background
+highlightColor = "#1E90FF"  # Same as primaryColor for consistency
+headerColor = "#F0F0F0"  # Light color for sidebar headers
+
+# Button Styling
+[theme.button]
+backgroundColor = "#1E90FF"  # Button background color matching the primary color
+borderRadius = "10px"  # Slightly more rounded buttons for a modern look
+textColor = "#FFFFFF"  # White text on buttons for better visibility
+borderColor = "#CCCCCC"  # Light grey border for subtle contrast
 
 # Font settings
-font = "sans serif"  # Options: "sans serif", "serif", "monospace"
+font = "sans serif"  # Professional sans-serif font
+fontSize = "16px"  # Comfortable base font size
+
+# Shadows and Borders for Elevated Appearance
+[theme.custom]
+boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)"  # Subtle shadow for elements like cards and containers
+borderRadius = "12px"  # Slightly rounded corners on cards and containers for softer UI
+dividerColor = "#CCCCCC"  # Light grey for dividers to add structure without too much contrast
+
+# Animation and Transition Effects
+[theme.transitions]
+transitionDuration = "0.3s"  # Smooth transitions for hover effects and button clicks
+hoverEffect = "scale(1.05)"  # Slight enlargement on hover for interactive elements like buttons
+
