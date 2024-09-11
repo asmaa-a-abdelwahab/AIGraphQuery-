@@ -14,27 +14,49 @@ OPENAI_ASSISTANT_MSG = "You are a helpful assistant."
 CONFIGURE_TIMEOUT = 120
 INSTALL_TIMEOUT = 120
 
-# Custom CSS for style
+# Custom CSS for dark sidebar and top bar
 st.markdown("""
     <style>
+    /* Dark theme for sidebar */
+    .sidebar .sidebar-content {
+        background-color: #1f1f1f;
+        color: white;
+    }
+    /* Dark theme for the header */
+    header {
+        background-color: #1f1f1f;
+        color: white;
+    }
+    /* Input fields, buttons, and text areas */
+    .stTextInput, .stTextArea, .stButton button {
+        background-color: #333333;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    /* Adjust the progress bar color */
+    .stProgress > div > div {
+        background-color: #4CAF50;
+    }
+    /* Style for main content */
     .main {
         background-color: #f9f9f9;
         font-family: 'Arial', sans-serif;
     }
-    .stTextInput, .stButton, .stTextArea {
-        padding: 10px;
-    }
-    .stProgress {
-        color: #4CAF50;
+    /* Code block style */
+    .stCode {
+        background-color: #333333;
+        color: white;
+        border-radius: 5px;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # Sidebar for input fields
 st.sidebar.title("Configuration")
-api_key = st.sidebar.text_input("OpenAI API Key", type="password")
-biobricks_token = st.sidebar.text_input("BioBricks Token", type="password")
-query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
+api_key = st.sidebar.text_input("🔑 OpenAI API Key", type="password")
+biobricks_token = st.sidebar.text_input("🧬 BioBricks Token", type="password")
+query_input = st.sidebar.text_area('📝 Natural Language Query', placeholder='Enter your SPARQL-like query here...')
 
 # Streamlit App setup
 st.title("📊 WikiPathways Query Tool")
