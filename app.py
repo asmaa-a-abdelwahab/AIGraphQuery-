@@ -49,7 +49,7 @@ def configure_biobricks(token):
     """Configure BioBricks with the provided token."""
     try:
         progress_bar.progress(10)
-        st.subheader("🔧 Configuring BioBricks...")
+        st.subheader("🔧 Configuring BioBricks & OpenAI...")
         child = pexpect.spawn('biobricks configure --overwrite y', timeout=CONFIGURE_TIMEOUT)
         child.logfile = sys.stdout.buffer  # Log output for debugging
 
@@ -59,7 +59,7 @@ def configure_biobricks(token):
         child.sendline('.')  # Set the path (current directory)
 
         progress_bar.progress(30)
-        st.success("✔️ BioBricks configuration successful!")
+        st.success("✔️ BioBricks configured successfully!")
 
     except pexpect.exceptions.TIMEOUT:
         st.error("⚠️ BioBricks configuration timed out. Please ensure the token is correct.")
@@ -73,7 +73,7 @@ def install_wikipathways():
     """Install WikiPathways asset using BioBricks."""
     try:
         progress_bar.progress(40)
-        st.subheader("📦 Installing WikiPathways...")
+        # st.subheader("📦 Installing WikiPathways...")
         subprocess.run(
             ['biobricks', 'install', 'wikipathways'],
             capture_output=True, text=True, timeout=INSTALL_TIMEOUT
@@ -88,7 +88,7 @@ def install_wikipathways():
 def query_openai(api_key, query_input):
     """Send natural language query to OpenAI and get SPARQL query."""
     openai.api_key = api_key
-    st.info("🔍 OpenAI Configuration successful!")
+    st.success("🔍 OpenAI Configured successfully!")
     natural_query = f'Use WikiPathways SPARQL Endpoint to retrieve the following information and include the necessary prefix lines.\n{query_input}'
     
     try:
@@ -110,7 +110,7 @@ def run_sparql_query(graph, sparql_query):
     """Execute SPARQL query on the WikiPathways RDF graph."""
     try:
         progress_bar.progress(80)
-        st.subheader("📡 Executing SPARQL query...")
+        # st.subheader("📡 Executing SPARQL query...")
         results = graph.query(sparql_query)
         df = pd.DataFrame(results, columns=[str(var) for var in results.vars])
         if df.empty:
