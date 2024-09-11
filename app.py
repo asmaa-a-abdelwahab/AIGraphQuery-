@@ -14,39 +14,39 @@ OPENAI_ASSISTANT_MSG = "You are a helpful assistant."
 CONFIGURE_TIMEOUT = 120
 INSTALL_TIMEOUT = 120
 
-# Custom CSS for style
-st.markdown("""
-    <style>
-    .main {
-        background-color: #f9f9f9;
-        font-family: 'Arial', sans-serif;
-    }
-    .stTextInput, .stButton, .stTextArea {
-        padding: 10px;
-    }
-    .stProgress {
-        color: #4CAF50;
-    }
-    /* Code block style */
-    .stCode {
-        background-color: #0a0a0a;
-        color: black;
-        border-radius: 1px;
-        padding: 3px;
-    }
-    .stDataframe {
-        background-color: #0a0a0a;
-        color: black;
-        border-radius: 2px;
-        padding: 5px;
-    }
-    /* Dark theme for sidebar */
-    .sidebar sidebarcontent {
-        background-color: #2c3e50;
-        color: #403f3f;
-    }
-    </style>
-""", unsafe_allow_html=True)
+# # Custom CSS for style
+# st.markdown("""
+#     <style>
+#     .main {
+#         background-color: #f9f9f9;
+#         font-family: 'Arial', sans-serif;
+#     }
+#     .stTextInput, .stButton, .stTextArea {
+#         padding: 10px;
+#     }
+#     .stProgress {
+#         color: #4CAF50;
+#     }
+#     /* Code block style */
+#     .stCode {
+#         background-color: #0a0a0a;
+#         color: black;
+#         border-radius: 1px;
+#         padding: 3px;
+#     }
+#     .stDataframe {
+#         background-color: #0a0a0a;
+#         color: black;
+#         border-radius: 2px;
+#         padding: 5px;
+#     }
+#     /* Dark theme for sidebar */
+#     .sidebar sidebarcontent {
+#         background-color: #2c3e50;
+#         color: #403f3f;
+#     }
+#     </style>
+# """, unsafe_allow_html=True)
 
 # Sidebar for input fields
 st.sidebar.title("Configuration")
