@@ -1,0 +1,9 @@
+biobricks==0.3.7
+ipython==8.25.0
+ipython==8.12.3
+ipywidgets==7.8.1
+openai==1.44.1
+pandas==2.2.2
+rdflib==7.0.0
+rdflib_hdt==3.1
+SPARQLWrapper==2.0.0
