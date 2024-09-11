@@ -15,16 +15,10 @@ CONFIGURE_TIMEOUT = 120
 INSTALL_TIMEOUT = 120
 
 # Custom CSS for style
-# Custom CSS for better visibility
 st.markdown("""
     <style>
-    body {
-        color: black;
-        background-color: #f0f2f6;
-    }
     .main {
         background-color: #f9f9f9;
-        color: black;
         font-family: 'Arial', sans-serif;
     }
     .stTextInput, .stButton, .stTextArea {
@@ -32,14 +26,6 @@ st.markdown("""
     }
     .stProgress {
         color: #4CAF50;
-    }
-    .stSidebar {
-        background-color: #f0f0f5;
-        color: black;
-    }
-    .stCode {
-        background-color: #e8e8e8;
-        color: black;
     }
     </style>
 """, unsafe_allow_html=True)
