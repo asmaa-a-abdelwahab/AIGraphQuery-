@@ -27,7 +27,7 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Configure BioBricks with subprocess call
-            subprocess.run(['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', '.'], shell=True)
+            subprocess.run(['biobricks configure', '--token', f'{biobricks_token}', '--bblib', '.'], shell=True)
 
 
             # Debugging output for BioBricks configuration
