@@ -25,6 +25,7 @@ if st.button("Generate and Execute Query"):
     else:
         try:
             # Instead of bb.configure(), let's set the token as an environment variable and directly fetch assets
+            bb.configure()
             os.environ['BIOBRICKS_TOKEN'] = biobricks_token
 
             st.info("Execution started...")
