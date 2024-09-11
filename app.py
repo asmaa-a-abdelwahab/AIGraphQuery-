@@ -8,7 +8,8 @@ import subprocess
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
-st.write("This app integrates OpenAI's API with WikiPathways SPARQL endpoint for querying biological pathways using natural language.")
+st.write(
+    "This app integrates OpenAI's API with WikiPathways SPARQL endpoint for querying biological pathways using natural language.")
 
 # Input fields for OpenAI API Key and BioBricks Token
 api_key = st.text_input("OpenAI API Key", type="password")
@@ -23,11 +24,16 @@ if st.button("Generate and Execute Query"):
         st.error("Please ensure all fields are filled out.")
     else:
         try:
-            # Configure BioBricks with subprocess call (more reliable than shell=True)
+            # Configure BioBricks with subprocess call
             configure_result = subprocess.run(
                 ['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', '.'],
                 capture_output=True, text=True
             )
+
+            # Debugging output for BioBricks configuration
+            st.text(f"BioBricks Configuration stdout: {configure_result.stdout}")
+            st.text(f"BioBricks Configuration stderr: {configure_result.stderr}")
+
             if configure_result.returncode != 0:
                 st.error(f"BioBricks configuration failed: {configure_result.stderr}")
                 st.stop()
