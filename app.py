@@ -1,3 +1,4 @@
+import os
 import openai
 import pandas as pd
 import streamlit as st
@@ -26,23 +27,13 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Configure BioBricks with subprocess call
-            result = subprocess.run(
-                f'biobricks configure --token {biobricks_token} --bblib .',
-                shell=True, capture_output=True, text=True, timeout=60  # Adding timeout for safety
-            )
+            # Use os.system to run the command
+            exit_code = os.system(f'biobricks configure --token {biobricks_token} --bblib .')
 
-            # Capture and display stdout and stderr for debugging
-            st.write(f"Command stdout: {result.stdout}")
-            st.write(f"Command stderr: {result.stderr}")
-
-            # Check if command was successful
-            if result.returncode == 0:
-                st.success("BioBricks configuration successful.")
+            if exit_code == 0:
+                print("Command executed successfully.")
             else:
-                st.error(f"BioBricks configuration failed with code {result.returncode}")
-
-            st.info("Execution started...")
+                print(f"Command failed with exit code {exit_code}")
 
             # Load WikiPathways data
             wikipathways = biobricks.assets('wikipathways')
