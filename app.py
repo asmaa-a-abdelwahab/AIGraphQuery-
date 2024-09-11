@@ -17,10 +17,6 @@ st.write("This app integrates OpenAI's API with WikiPathways SPARQL endpoint for
 api_key = st.text_input("OpenAI API Key", type="password")
 biobricks_token = st.text_input("BioBricks Token", type="password")
 
-# Using subprocess to run bb.configure() and pass the token
-process = subprocess.Popen(['biobricks', 'configure'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-stdout, stderr = process.communicate(input=biobricks_token)
-
 # Input for the natural language query
 query_input = st.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
 
@@ -31,6 +27,7 @@ if st.button("Generate and Execute Query"):
     else:
         try:
             # Instead of bb.configure(), let's set the token as an environment variable and directly fetch assets
+            subprocess.run(['bb', 'configure'], shell=True)
             os.environ['BIOBRICKS_TOKEN'] = biobricks_token
 
             st.info("Execution started...")
