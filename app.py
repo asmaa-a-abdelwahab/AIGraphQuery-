@@ -28,11 +28,8 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Prepare the command with shlex to handle special characters
-            command = f'biobricks configure --token {biobricks_token} --bblib .'
-
             # Run the command
-            result = subprocess.run(command, capture_output=True, text=True)
+            result = subprocess.run(f'biobricks configure --token {biobricks_token} --bblib .', capture_output=True, text=True)
 
             if result.returncode == 0:
                 print("BioBricks configuration successful.")
