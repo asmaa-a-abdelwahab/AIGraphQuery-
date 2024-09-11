@@ -24,10 +24,12 @@ if st.button("Generate and Execute Query"):
         st.error("Please ensure all fields are filled out.")
     else:
         try:
+            st.info("Configuring BioBricks...")
+
             # Configure BioBricks with subprocess call
             configure_result = subprocess.run(
                 ['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', '.'],
-                capture_output=True, text=True
+                capture_output=True, text=True, timeout=60  # Adding a timeout for the subprocess
             )
 
             # Debugging output for BioBricks configuration
@@ -51,6 +53,7 @@ if st.button("Generate and Execute Query"):
                             f'{query_input}'
 
             # Call OpenAI API to convert natural language to SPARQL
+            st.info("Calling OpenAI API...")
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
@@ -69,6 +72,7 @@ if st.button("Generate and Execute Query"):
                 st.info(f"SPARQL Query extracted:\n{sparql_query}")
 
                 # Execute the SPARQL query
+                st.info("Executing SPARQL query...")
                 results = g.query(sparql_query)
                 df = pd.DataFrame(results, columns=[str(var) for var in results.vars])
                 store.close()
@@ -82,5 +86,7 @@ if st.button("Generate and Execute Query"):
             else:
                 st.error("SPARQL block not found in the response.")
 
+        except subprocess.TimeoutExpired:
+            st.error("BioBricks configuration timed out.")
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
