@@ -26,12 +26,9 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Use subprocess to run the biobricks configure command with the token
-            os.environ['BIOBRICKS_TOKEN'] = biobricks_token  # Set token as an environment variable
-
-            # Call biobricks configure
+            # Automatically answer "yes" to the overwrite prompt using echo
             configure_result = subprocess.run(
-                ['biobricks', 'configure', '--token', biobricks_token, '--bblib', '.'],
+                ['bash', '-c', f'echo "y" | biobricks configure --token {biobricks_token} --bblib .'],
                 capture_output=True, text=True
             )
 
