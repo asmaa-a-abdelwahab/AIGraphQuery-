@@ -1,3 +1,4 @@
+import os
 import openai
 import textwrap
 import pandas as pd
@@ -7,7 +8,6 @@ from rdflib_hdt import HDTStore
 import biobricks as bb
 
 # Streamlit App setup
-
 st.title("WikiPathways Query Tool")
 st.write("This app integrates OpenAI's API with WikiPathways SPARQL endpoint for querying biological pathways using natural language.")
 
@@ -24,8 +24,10 @@ if st.button("Generate and Execute Query"):
         st.error("Please ensure all fields are filled out.")
     else:
         try:
-            # Configure BioBricks using the token
-            bb.configure(biobricks_token)
+            # Set the BioBricks token as an environment variable
+            os.environ['BIOBRICKS_TOKEN'] = biobricks_token
+            bb.configure()  # Now it uses the token from the environment
+
             st.info("Execution started...")
 
             # Load WikiPathways data
