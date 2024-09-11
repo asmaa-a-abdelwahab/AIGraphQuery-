@@ -1,11 +1,11 @@
-import sys
-import pexpect
 import openai
 import pandas as pd
 import streamlit as st
 from rdflib import Graph
 from rdflib_hdt import HDTStore
 import biobricks
+import subprocess
+import os
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
@@ -26,19 +26,23 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Use pexpect to run the biobricks configure command with token input
-            child = pexpect.spawn('biobricks configure', timeout=120)
-            child.logfile = sys.stdout.buffer  # Log the output for debugging
+            # Use subprocess to run the biobricks configure command with the token
+            os.environ['BIOBRICKS_TOKEN'] = biobricks_token  # Set token as an environment variable
 
-            # Adjust prompt matching based on the actual output you observed
-            child.expect('Input a token from biobricks.ai/token:')
-            child.sendline(biobricks_token)  # Send the BioBricks token
+            # Call biobricks configure
+            configure_result = subprocess.run(
+                ['biobricks', 'configure', '--token', biobricks_token, '--bblib', '.'],
+                capture_output=True, text=True
+            )
 
-            child.expect('Choose path to store bricks:')
-            child.sendline('.')  # Send the path (current directory)
+            # Debugging output for BioBricks configuration
+            st.text(f"BioBricks Configuration stdout: {configure_result.stdout}")
+            st.text(f"BioBricks Configuration stderr: {configure_result.stderr}")
 
-            # Wait for the command to complete
-            child.expect(pexpect.EOF)
+            if configure_result.returncode != 0:
+                st.error(f"BioBricks configuration failed: {configure_result.stderr}")
+                st.stop()
+
             st.success("BioBricks configuration successful!")
 
             # Load WikiPathways data
@@ -85,9 +89,7 @@ if st.button("Generate and Execute Query"):
             else:
                 st.error("SPARQL block not found in the response.")
 
-        except pexpect.exceptions.TIMEOUT:
-            st.error("BioBricks configuration timed out. Please ensure the token is correct.")
-        except pexpect.exceptions.ExceptionPexpect as e:
-            st.error(f"An error occurred while configuring BioBricks: {str(e)}")
+        except subprocess.TimeoutExpired:
+            st.error("BioBricks configuration timed out.")
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
