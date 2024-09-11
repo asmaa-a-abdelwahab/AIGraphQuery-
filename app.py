@@ -4,9 +4,8 @@ import streamlit as st
 from rdflib import Graph
 from rdflib_hdt import HDTStore
 import biobricks
-import subprocess
+import pexpect
 import os
-import shutil
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
@@ -27,26 +26,23 @@ if st.button("Generate and Execute Query"):
         try:
             st.info("Configuring BioBricks...")
 
-            # Use subprocess to run the biobricks configure command with the token
-            os.environ['BIOBRICKS_TOKEN'] = biobricks_token  # Set token as an environment variable
+            # Use pexpect to run the biobricks configure command with token input
+            child = pexpect.spawn('biobricks configure --overwrite y', timeout=120)
+            child.logfile = sys.stdout.buffer  # Log the output for debugging
 
-            # Call biobricks configure
-            configure_result = subprocess.run(
-                ['biobricks', 'configure', '--overwrite', 'y', '--token', biobricks_token, '--bblib', '.'],
-                capture_output=True, text=True
-            )
+            # Handle prompts from biobricks configure
+            child.expect('Input a token from biobricks.ai/token:')
+            child.sendline(biobricks_token)  # Send the BioBricks token
 
-            # Debugging output for BioBricks configuration
-            st.text(f"BioBricks Configuration stdout: {configure_result.stdout}")
-            st.text(f"BioBricks Configuration stderr: {configure_result.stderr}")
+            # Handle the path configuration prompt
+            child.expect('Choose path to store bricks:')
+            child.sendline('.')  # Choose current directory
 
-            if configure_result.returncode != 0:
-                st.error(f"BioBricks configuration failed: {configure_result.stderr}")
-                st.stop()
-
+            # Wait for the configuration process to finish
+            child.expect(pexpect.EOF)
             st.success("BioBricks configuration successful!")
 
-            # Load WikiPathways data
+            # Proceed with loading WikiPathways data and querying
             wikipathways = biobricks.assets('wikipathways')
             store = HDTStore(wikipathways.wikipathways_hdt)
             g = Graph(store=store)
@@ -90,7 +86,9 @@ if st.button("Generate and Execute Query"):
             else:
                 st.error("SPARQL block not found in the response.")
 
-        except subprocess.TimeoutExpired:
-            st.error("BioBricks configuration timed out.")
+        except pexpect.exceptions.TIMEOUT:
+            st.error("BioBricks configuration timed out. Please ensure the token is correct.")
+        except pexpect.exceptions.ExceptionPexpect as e:
+            st.error(f"An error occurred while configuring BioBricks: {str(e)}")
         except Exception as e:
-            st.error(f"An error occurred: {str(e)}")
+            st
