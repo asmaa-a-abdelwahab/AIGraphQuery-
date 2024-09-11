@@ -40,13 +40,10 @@ if st.button("Generate and Execute Query"):
             child.sendline('.')  # Send the path (current directory)
             st.success("BioBricks configuration successful!")
 
-            subprocess.run(['biobricks install wikipathways'], shell=True)
-
+            pexpect.spawn('biobricks install wikipathways', timeout=120)
 
             # Proceed with loading WikiPathways data and querying
             wikipathways = biobricks.assets('wikipathways')
-            st.write(vars(wikipathways))  # This will print the attributes of the object
-
             store = HDTStore(wikipathways.wikipathways_hdt)
             g = Graph(store=store)
 
