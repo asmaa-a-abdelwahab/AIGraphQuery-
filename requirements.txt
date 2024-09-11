@@ -1,7 +1,7 @@
 biobricks
 ipython
 ipywidgets
-openai==0.28.0
+openai
 pandas
 rdflib
 rdflib_hdt
