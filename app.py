@@ -6,7 +6,6 @@ from rdflib_hdt import HDTStore
 import biobricks
 import subprocess
 
-
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
 st.write("This app integrates OpenAI's API with WikiPathways SPARQL endpoint for querying biological pathways using natural language.")
@@ -24,11 +23,18 @@ if st.button("Generate and Execute Query"):
         st.error("Please ensure all fields are filled out.")
     else:
         try:
-            # Instead of bb.configure(), let's set the token as an environment variable and directly fetch assets
-            subprocess.run(['biobricks configure', '--token', f'{biobricks_token}', '--bblib', '.'])
+            # Configure BioBricks with subprocess call (more reliable than shell=True)
+            configure_result = subprocess.run(
+                ['biobricks', 'configure', '--token', f'{biobricks_token}', '--bblib', '.'],
+                capture_output=True, text=True
+            )
+            if configure_result.returncode != 0:
+                st.error(f"BioBricks configuration failed: {configure_result.stderr}")
+                st.stop()
+
             st.info("Execution started...")
 
-            # Load WikiPathways data without calling bb.configure()
+            # Load WikiPathways data
             wikipathways = biobricks.assets('wikipathways')
             store = HDTStore(wikipathways.wikipathways_hdt)
             g = Graph(store=store)
