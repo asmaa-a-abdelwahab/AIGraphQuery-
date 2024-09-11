@@ -5,8 +5,6 @@ import streamlit as st
 from rdflib import Graph
 from rdflib_hdt import HDTStore
 import biobricks
-import subprocess
-import shlex
 
 # Streamlit App setup
 st.title("WikiPathways Query Tool")
@@ -28,11 +26,14 @@ if st.button("Generate and Execute Query"):
             st.info("Configuring BioBricks...")
 
             # Use pexpect to run the biobricks configure command with token input
-            child = pexpect.spawn('biobricks configure')  # Set a longer timeout (e.g., 120 seconds)
-            child.expect('Input a token from biobricks.ai / token:')  # Adjust the prompt to match what's actually expected
+            child = pexpect.spawn('biobricks configure', timeout=120)
+            child.logfile = sys.stdout.buffer  # Log the output for debugging
+
+            # Adjust prompt matching based on the actual output you observed
+            child.expect('Input a token from biobricks.ai/token:')
             child.sendline(biobricks_token)  # Send the BioBricks token
 
-            child.expect('Choose path to store bricks:')  # Expect the path input prompt
+            child.expect('Choose path to store bricks:')
             child.sendline('.')  # Send the path (current directory)
 
             # Wait for the command to complete
