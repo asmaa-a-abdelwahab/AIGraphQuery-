@@ -67,7 +67,7 @@ st.sidebar.markdown(
     """
     <div style="text-align: center; margin-bottom: 20px;">
         <p style="font-size:14px; color:white;">BY: Asmaa A. Abdelwahab</p>
-        <a href="https://github.com/asmaa-a-abdelwahab" target="_blank" style="font-size:14px; color:white;">GitHub: asmaa-a-abdelwahab</a>
+        <a href="https://github.com/asmaa-a-abdelwahab" target="_blank" style="font-size:14px; color:black;">GitHub: asmaa-a-abdelwahab</a>
     </div>
     """, 
     unsafe_allow_html=True
