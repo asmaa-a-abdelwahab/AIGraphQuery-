@@ -48,6 +48,15 @@ INSTALL_TIMEOUT = 120
 #     </style>
 # """, unsafe_allow_html=True)
 
+st.sidebar.markdown(
+    """
+    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+        <img src="https://github.com/asmaa-a-abdelwahab/AIGraphQuery-/blob/main/EwC%20full%20logo.png" alt="Logo" width="150" style="border-radius: 10px;">
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
+
 # Sidebar for input fields
 st.sidebar.title("Configuration")
 api_key = st.sidebar.text_input("OpenAI API Key", type="password")
