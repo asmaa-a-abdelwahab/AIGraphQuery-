@@ -66,10 +66,9 @@ query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter 
 st.sidebar.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 st.sidebar.markdown(
     """
-    <div style="position: absolute; bottom: 100; width: 100%; text-align: center;">
-        <p style="font-size:14px; color:black;">BY: Asmaa A. Abdelwahab</p>
-        <p style="font-size:14px; color:black;">GitHub: 
-            <a href="https://github.com/asmaa-a-abdelwahab" target="_blank" style="font-size:14px; color:black;">asmaa-a-abdelwahab</a>
+    <div style="position: absolute; bottom: 10; width: 100%; text-align: center;">
+        <p style="font-size:14px; color:black;">BY: 
+            <a href="https://github.com/asmaa-a-abdelwahab" target="_blank" style="font-size:14px; color:black;">Asmaa A. Abdelwahab</a>
         </p>
     </div>
     """, 
