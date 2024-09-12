@@ -58,15 +58,15 @@ st.sidebar.markdown(
 )
 
 # Sidebar for input fields
-st.sidebar.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+st.sidebar.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 st.sidebar.title("Configuration")
 api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 biobricks_token = st.sidebar.text_input("BioBricks Token", type="password")
 query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
-
+st.sidebar.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 st.sidebar.markdown(
     """
-    <div style="position: absolute; bottom: 0; width: 100%; text-align: center;">
+    <div style="position: absolute; bottom: 100; width: 100%; text-align: center;">
         <p style="font-size:14px; color:black;">BY: Asmaa A. Abdelwahab</p>
         <p style="font-size:14px; color:black;">GitHub: 
             <a href="https://github.com/asmaa-a-abdelwahab" target="_blank" style="font-size:14px; color:black;">asmaa-a-abdelwahab</a>
