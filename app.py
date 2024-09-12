@@ -50,7 +50,7 @@ INSTALL_TIMEOUT = 120
 
 st.sidebar.markdown(
     """
-    <div style="margin-bottom: 20px;">
+    <div style="margin-bottom: 60px;">
         <img src="https://raw.githubusercontent.com/asmaa-a-abdelwahab/AIGraphQuery-/main/EwC%20full%20logo.png" alt="Logo" width="150" style="border-radius: 1px; float: left;">
     </div>
     """, 
@@ -65,7 +65,7 @@ query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter 
 
 st.sidebar.markdown(
     """
-    <div style="text-align: center;">
+    <div style="text-align: center; float: bottom">
         <p style="font-size:14px; color:black;">BY: Asmaa A. Abdelwahab</p>
         <p style="font-size:14px; color:black;">GitHub: 
             <a href="https://github.com/asmaa-a-abdelwahab" target="_blank" style="font-size:14px; color:black;">asmaa-a-abdelwahab</a>
