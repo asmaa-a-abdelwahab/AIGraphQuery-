@@ -50,7 +50,7 @@ INSTALL_TIMEOUT = 120
 
 st.sidebar.markdown(
     """
-    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: left; align-items: left; margin-bottom: 20px;">
         <img src="https://raw.githubusercontent.com/asmaa-a-abdelwahab/AIGraphQuery-/main/EwC%20full%20logo.png" alt="Logo" width="150" style="border-radius: 10px;">
     </div>
     """, 
@@ -63,7 +63,7 @@ api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 biobricks_token = st.sidebar.text_input("BioBricks Token", type="password")
 query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
 
-st.sidebar.text('\nBY: Asmaa A. Abdelwahab\nGitHub: asmaa-a-abdelwahab')
+st.sidebar.text('\n\n\nBY: Asmaa A. Abdelwahab\nGitHub: asmaa-a-abdelwahab')
 
 # Streamlit App setup
 st.title("🧬 WikiPathways Query Tool\n\n")
