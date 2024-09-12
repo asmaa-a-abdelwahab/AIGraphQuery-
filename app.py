@@ -58,6 +58,7 @@ st.sidebar.markdown(
 )
 
 # Sidebar for input fields
+st.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 st.sidebar.title("Configuration")
 api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 biobricks_token = st.sidebar.text_input("BioBricks Token", type="password")
