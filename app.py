@@ -63,6 +63,9 @@ api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 biobricks_token = st.sidebar.text_input("BioBricks Token", type="password")
 query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter your SPARQL-like query here...')
 
+st.sidebar.text('BY: Asmaa A. Abdelwahab')
+st.sidebar.text('GitHub: asmaa-a-abdelwahab')
+
 # Streamlit App setup
 st.title("🧬 WikiPathways Query Tool\n\n")
 st.markdown("""
