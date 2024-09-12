@@ -18,7 +18,7 @@ INSTALL_TIMEOUT = 120
 st.sidebar.markdown(
     """
     <div style="float: left;">
-        <img src="https://raw.githubusercontent.com/asmaa-a-abdelwahab/AIGraphQuery-/main/EwC%20full%20logo.png" alt="Logo" width="150" style="border-radius: 1px; float: left;">
+        <img src="https://raw.githubusercontent.com/asmaa-a-abdelwahab/AIGraphQuery-/main/EwC%20full%20logo.png" alt="Logo" width="100" style="border-radius: 1px; float: left;">
     </div>
     """, 
     unsafe_allow_html=True
