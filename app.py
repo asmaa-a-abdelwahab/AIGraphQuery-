@@ -66,7 +66,7 @@ query_input = st.sidebar.text_area('Natural Language Query', placeholder='Enter 
 
 st.sidebar.markdown(
     """
-    <div style="text-align: center; float: bottom">
+    <div style="position: absolute; bottom: 0; width: 100%; text-align: center;">
         <p style="font-size:14px; color:black;">BY: Asmaa A. Abdelwahab</p>
         <p style="font-size:14px; color:black;">GitHub: 
             <a href="https://github.com/asmaa-a-abdelwahab" target="_blank" style="font-size:14px; color:black;">asmaa-a-abdelwahab</a>
@@ -75,6 +75,7 @@ st.sidebar.markdown(
     """, 
     unsafe_allow_html=True
 )
+
 
 # Streamlit App setup
 st.title("🧬 WikiPathways Query Tool\n\n")
